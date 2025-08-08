@@ -3,236 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProxyHub Script Hub</title>
+    <title>ProxyHub | Premium Roblox Scripts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6c5ce7;
-            --primary-dark: #5649c0;
-            --secondary: #00cec9;
-            --dark: #2d3436;
-            --light: #f5f6fa;
-            --gray: #636e72;
+            --primary: #7b2cbf;
+            --primary-light: #9d4edd;
+            --secondary: #4361ee;
+            --accent: #f72585;
+            --dark: #10002b;
+            --darker: #0a0118;
+            --light: #e2e2e2;
+            --lighter: #f8f9fa;
+            --gray: #adb5bd;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        
+
         body {
-            background-color: #1a1a2e;
+            background-color: var(--darker);
             color: var(--light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-        
-        .script-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary);
-            color: var(--dark);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #00b5b2;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 206, 201, 0.3);
-        }
-        
-        .key-section {
-            text-align: center;
-            margin-bottom: 3rem;
-            transition: all 0.3s ease;
-        }
-        
-        .key-input {
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            width: 300px;
-            max-width: 100%;
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        .key-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .key-input:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
-        
-        .description {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .description-text {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .tab-btn {
-            padding: 0.7rem 1.5rem;
-            background: transparent;
-            border: none;
-            border-radius: 50px;
-            color: var(--light);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .tab-btn.active {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .tab-btn:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .tab-content h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-        
-        .loader {
-            display: none;
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto;
-        }
-        
-        .beta-message {
-            display: none;
-            color: var(--secondary);
-            font-weight: 600;
-            padding: 1rem;
-            background: rgba(0, 206, 201, 0.1);
-            border-radius: 10px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 1rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-weight: 400;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.85rem 1.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(123, 44, 191, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .key-section {
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .input-group {
+            max-width: 500px;
+            margin: 1.5rem auto 0;
+            display: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.2);
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--lighter);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 6px;
+            color: var(--light);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .tab-content h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--lighter);
+            font-size: 1.2rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1000;
+            transform: translateX(200%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--accent);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification i {
+            font-size: 1.2rem;
+        }
+
         footer {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 4rem;
             color: var(--gray);
             font-size: 0.9rem;
+            padding-bottom: 2rem;
         }
-        
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
+            .container {
+                padding: 1.5rem 1rem;
             }
             
-            .script-buttons {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
             }
             
             .btn {
                 width: 100%;
                 max-width: 300px;
+                justify-content: center;
+            }
+            
+            .card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -240,57 +288,88 @@
 <body>
     <div class="container">
         <header>
-            <h1>ProxyHub Script Hub</h1>
-            <p class="subtitle">The most advanced and reliable scripting solution for your Roblox experience. Elevate your gameplay with our powerful and optimized scripts.</p>
+            <div class="logo">ProxyHub</div>
+            <p class="tagline">Premium Roblox scripts with unmatched performance and reliability. Elevate your gaming experience.</p>
         </header>
         
-        <div class="script-buttons">
-            <button id="releaseBtn" class="btn btn-primary">Get Release Script</button>
-            <button id="betaBtn" class="btn btn-secondary">Get Beta Script</button>
-            <div id="releaseLoader" class="loader"></div>
-            <div id="betaMessage" class="beta-message">Please join discord server to join our beta program</div>
-        </div>
-        
-        <div class="key-section" id="keySection">
-            <button id="keyBtn" class="btn btn-primary">Get a Key</button>
-            <input type="text" id="userIdInput" class="key-input" placeholder="enter your roblox user id">
-        </div>
-        
-        <div class="description">
-            <div class="description-text">
-                ProxyHub offers cutting-edge scripting solutions designed to enhance your Roblox experience. 
-                Our scripts are optimized for performance, regularly updated, and packed with features that 
-                give you the competitive edge you've been looking for.
+        <div class="card">
+            <div class="btn-group">
+                <button id="releaseBtn" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Get Release Script
+                </button>
+                <button id="betaBtn" class="btn btn-secondary">
+                    <i class="fas fa-flask"></i> Get Beta Script
+                </button>
             </div>
             
+            <div class="key-section" id="keySection">
+                <button id="keyBtn" class="btn btn-primary">
+                    <i class="fas fa-key"></i> Get a Key
+                </button>
+                <div class="input-group" id="inputGroup">
+                    <input type="text" id="userIdInput" class="input-field" placeholder="Enter your Roblox User ID">
+                    <button id="submitBtn" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="section-title">About ProxyHub</h2>
+            <p style="margin-bottom: 1.5rem;">Discover the most advanced scripting solution for Roblox, designed by players for players. Our scripts offer unparalleled performance, security, and features that give you the competitive edge.</p>
+            
             <div class="tabs">
-                <button class="tab-btn active" data-tab="why">Why Pick Us</button>
-                <button class="tab-btn" data-tab="support">What Do We Support</button>
-                <button class="tab-btn" data-tab="who">Who Are We</button>
+                <button class="tab-btn active" data-tab="why">Why Choose Us</button>
+                <button class="tab-btn" data-tab="support">Supported Games</button>
+                <button class="tab-btn" data-tab="team">Our Team</button>
             </div>
             
             <div class="tab-content active" id="why">
-                <h3>Superior Quality & Performance</h3>
-                <p>Our scripts are meticulously crafted by experienced developers who understand the Roblox platform inside out. We prioritize not just functionality but also optimization to ensure smooth performance even in demanding scenarios.</p>
-                <p>Regular updates keep our scripts ahead of detection systems, and our dedicated support team ensures any issues are resolved promptly.</p>
+                <h3>Premium Quality Scripts</h3>
+                <p>Every script is meticulously optimized for performance and reliability. We prioritize smooth execution and minimal resource usage to ensure the best gaming experience.</p>
+                
+                <h3>Regular Updates</h3>
+                <p>Our team works around the clock to keep scripts updated and ahead of detection systems. You'll always have access to the latest features and protections.</p>
+                
+                <h3>Dedicated Support</h3>
+                <p>Get help from our expert support team through our Discord server. We're committed to resolving any issues promptly.</p>
             </div>
             
             <div class="tab-content" id="support">
-                <h3>Comprehensive Game Support</h3>
-                <p>We currently support all major Roblox games including Adopt Me, Brookhaven RP, Blox Fruits, Pet Simulator X, and many more. Our scripts are tested across different game versions to ensure compatibility.</p>
-                <p>Features include auto-farm, teleport, item esp, auto-buy, and many other utilities designed to enhance your gameplay experience.</p>
+                <h3>Popular Game Support</h3>
+                <p>We currently support all major Roblox experiences including:</p>
+                
+                <h3>RPG & Adventure</h3>
+                <p>Blox Fruits, King Legacy, Anime Adventures, All Star Tower Defense</p>
+                
+                <h3>Simulators</h3>
+                <p>Pet Simulator X, Bee Swarm Simulator, Mining Simulator 2</p>
+                
+                <h3>Social & RP</h3>
+                <p>Brookhaven RP, Adopt Me, Royale High</p>
             </div>
             
-            <div class="tab-content" id="who">
-                <h3>Experienced Development Team</h3>
-                <p>ProxyHub was founded by a team of passionate Roblox players and developers with over 5 years of experience in Lua scripting and reverse engineering. We combine technical expertise with a deep understanding of what players need.</p>
-                <p>Our community-driven approach means we listen to feedback and constantly work to improve our products based on user suggestions.</p>
+            <div class="tab-content" id="team">
+                <h3>Experienced Developers</h3>
+                <p>Our team consists of seasoned Roblox developers with years of experience in Lua scripting and game mechanics. We know what makes a great script.</p>
+                
+                <h3>Passionate Gamers</h3>
+                <p>We're players first. Every feature is designed with real gameplay needs in mind, not just technical specifications.</p>
+                
+                <h3>Community Focused</h3>
+                <p>We actively listen to our users and implement the most requested features. Your feedback shapes our development roadmap.</p>
             </div>
         </div>
         
         <footer>
-            <p>&copy; 2023 ProxyHub Script Hub. All rights reserved.</p>
+            <p>&copy; 2023 ProxyHub. All rights reserved. | Not affiliated with Roblox Corporation.</p>
         </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <i id="notificationIcon"></i>
+        <span id="notificationText"></span>
     </div>
 
     <script>
@@ -300,76 +379,98 @@
         
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
-                tabBtns.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
                 
-                // Add active class to clicked button and corresponding content
                 btn.classList.add('active');
                 const tabId = btn.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
         });
         
-        // Release script button
-        const releaseBtn = document.getElementById('releaseBtn');
-        const releaseLoader = document.getElementById('releaseLoader');
-        
-        releaseBtn.addEventListener('click', () => {
-            releaseBtn.style.display = 'none';
-            releaseLoader.style.display = 'block';
+        // Notification system
+        function showNotification(iconClass, text) {
+            const notification = document.getElementById('notification');
+            const icon = document.getElementById('notificationIcon');
+            const message = document.getElementById('notificationText');
             
-            // Simulate loading (in a real scenario, this would fetch the script)
+            icon.className = iconClass;
+            message.textContent = text;
+            
+            notification.classList.add('show');
+            
             setTimeout(() => {
-                window.location.href = 'https://proxyhubkey.vercel.app/release_script';
-            }, 2000);
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Release script button
+        document.getElementById('releaseBtn').addEventListener('click', () => {
+            // In a real implementation, this would copy the script to clipboard
+            navigator.clipboard.writeText('loadstring(game:HttpGet("https://proxyhubkey.vercel.app/release_script"))()')
+                .then(() => {
+                    showNotification('fas fa-check-circle', 'Release script copied to clipboard!');
+                })
+                .catch(err => {
+                    showNotification('fas fa-exclamation-circle', 'Failed to copy script');
+                    console.error('Failed to copy: ', err);
+                });
         });
         
         // Beta script button
-        const betaBtn = document.getElementById('betaBtn');
-        const betaMessage = document.getElementById('betaMessage');
-        
-        betaBtn.addEventListener('click', () => {
-            betaBtn.style.display = 'none';
-            betaMessage.style.display = 'block';
+        document.getElementById('betaBtn').addEventListener('click', () => {
+            const discordLink = 'https://discord.gg/c5xJHEfTtu';
+            navigator.clipboard.writeText(discordLink)
+                .then(() => {
+                    showNotification('fab fa-discord', 'Discord link copied to clipboard!');
+                })
+                .catch(err => {
+                    showNotification('fas fa-exclamation-circle', 'Failed to copy link');
+                    console.error('Failed to copy: ', err);
+                });
         });
         
         // Key button functionality
         const keyBtn = document.getElementById('keyBtn');
-        const keySection = document.getElementById('keySection');
+        const inputGroup = document.getElementById('inputGroup');
         const userIdInput = document.getElementById('userIdInput');
+        const submitBtn = document.getElementById('submitBtn');
         
         keyBtn.addEventListener('click', () => {
-            if (userIdInput.style.display === 'block') {
-                // Validate and redirect
-                const userId = userIdInput.value.trim();
-                
-                if (!userId) {
-                    alert('Please enter your Roblox User ID');
-                    return;
-                }
-                
-                if (!/^\d+$/.test(userId)) {
-                    alert('User ID must be a number');
-                    return;
-                }
-                
-                window.location.href = `https://proxyhubkey.vercel.app/get_key?user_id=${userId}`;
+            if (inputGroup.style.display === 'block') {
+                // Already showing input, validate and redirect
+                validateAndRedirect();
             } else {
                 // Show input field
-                keySection.style.marginBottom = '3.5rem';
-                userIdInput.style.display = 'block';
+                inputGroup.style.display = 'block';
+                keyBtn.style.display = 'none';
                 userIdInput.focus();
-                keyBtn.textContent = 'Submit';
             }
         });
         
-        // Allow pressing Enter in the input field to submit
+        submitBtn.addEventListener('click', validateAndRedirect);
+        
         userIdInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                keyBtn.click();
+                validateAndRedirect();
             }
         });
+        
+        function validateAndRedirect() {
+            const userId = userIdInput.value.trim();
+            
+            if (!userId) {
+                showNotification('fas fa-exclamation-circle', 'Please enter your User ID');
+                return;
+            }
+            
+            if (!/^\d+$/.test(userId)) {
+                showNotification('fas fa-exclamation-circle', 'User ID must be a number');
+                return;
+            }
+            
+            window.location.href = `https://proxyhubkey.vercel.app/get_key?user_id=${userId}`;
+        }
     </script>
 </body>
 </html>
