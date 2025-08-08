@@ -4,183 +4,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProxyHub | Premium Roblox Scripts</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Sora:wght@600;800&display=swap');
+
         :root {
-            --primary: #7b2cbf;
-            --primary-light: #9d4edd;
-            --secondary: #4361ee;
-            --accent: #f72585;
-            --dark: #10002b;
-            --darker: #0a0118;
-            --light: #e2e2e2;
-            --lighter: #f8f9fa;
-            --gray: #adb5bd;
+            --bg-color: #0A0F1A;
+            --surface-color: #1A2A3A;
+            --border-color: rgba(59, 130, 246, 0.2);
+            --primary-blue: #3B82F6;
+            --glow-blue: rgba(59, 130, 246, 0.3);
+            --grid-blue: rgba(59, 130, 246, 0.08);
+            --text-color: #FFFFFF;
+            --text-muted: #94A3B8;
+            --success-green: #10B981;
+            --font-heading: 'Sora', sans-serif;
+            --font-body: 'Roboto Mono', monospace;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
-
+        
         body {
-            background-color: var(--darker);
-            color: var(--light);
-            line-height: 1.6;
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
+            position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .aurora-background {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: -4; 
+            overflow: hidden;
+        }
+        
+        .aurora-background::before {
+            content: ''; 
+            position: absolute; 
+            width: 150vmax; 
+            height: 150vmax;
+            top: 50%; 
+            left: 50%;
+            background: radial-gradient(circle, var(--glow-blue) 0%, transparent 45%);
+            border-radius: 50%;
+            animation: move-aurora 45s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes move-aurora {
+            0% { transform: translate(-30%, -70%) scale(1.1); }
+            50% { transform: translate(-70%, -30%) scale(1); }
+            100% { transform: translate(-40%, -80%) scale(1.2); }
+        }
+        
+        .grid-background {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: -3;
+            background-image:
+                linear-gradient(to right, var(--grid-blue) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-blue) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: scroll-grid 20s linear infinite;
+        }
+        
+        @keyframes scroll-grid {
+            from { background-position: 0 0; }
+            to { background-position: -50px -50px; }
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-            animation: fadeIn 0.5s ease-out;
+        .container { 
+            width: 90%; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            position: relative; 
+            z-index: 2; 
         }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-top: 1rem;
+        
+        .section { 
+            padding: 80px 0; 
         }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -1px;
+        
+        .section-header { 
+            text-align: center; 
+            margin-bottom: 3rem; 
         }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: var(--gray);
+        
+        .section-header h2 { 
+            font-family: var(--font-heading); 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            letter-spacing: -1.5px; 
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
             max-width: 700px;
-            margin: 0 auto 2rem;
-            font-weight: 400;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        .btn { 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            border: 2px solid transparent; 
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+        
+        .btn-primary { 
+            background-color: var(--primary-blue); 
+            color: #fff; 
+            box-shadow: 0 0 20px var(--glow-blue); 
+        }
+        
+        .btn-primary:hover { 
+            background-color: #2563EB; 
+            transform: translateY(-3px); 
+            box-shadow: 0 0 35px var(--glow-blue); 
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
         }
 
         .btn-group {
             display: flex;
             gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
             margin-bottom: 2rem;
-        }
-
-        .btn {
-            padding: 0.85rem 1.75rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(123, 44, 191, 0.3);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--light);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .key-section {
-            text-align: center;
-            transition: all 0.3s ease;
+            flex-wrap: wrap;
         }
 
         .input-group {
-            max-width: 500px;
+            max-width: 400px;
             margin: 1.5rem auto 0;
             display: none;
         }
 
         .input-field {
             width: 100%;
-            padding: 0.85rem 1.5rem;
+            padding: 12px 20px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            font-family: var(--font-body);
         }
 
         .input-field:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.2);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
 
         .input-field::placeholder {
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--lighter);
-            font-weight: 600;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 3px;
-        }
-
         .tabs {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
@@ -197,7 +211,7 @@
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--primary-blue), #2563EB);
             color: white;
         }
 
@@ -216,20 +230,27 @@
 
         .tab-content p {
             margin-bottom: 1rem;
-            color: var(--gray);
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
         .tab-content h3 {
             margin: 1.5rem 0 0.5rem;
-            color: var(--lighter);
+            color: var(--text-color);
             font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--dark);
+            background: var(--surface-color);
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 8px;
@@ -240,59 +261,114 @@
             z-index: 1000;
             transform: translateX(200%);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--primary-blue);
         }
 
         .notification.show {
             transform: translateX(0);
         }
 
-        .notification i {
-            font-size: 1.2rem;
+        .pricing-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 1.5rem; 
+        }
+        
+        .price-card { 
+            background-color: var(--surface-color); 
+            border: 1px solid var(--border-color); 
+            padding: 2rem; 
+            border-radius: 12px; 
+            text-align: center; 
+            transition: all 0.3s ease; 
+            position: relative; 
+        }
+        
+        .price-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 0 30px rgba(0,0,0,0.3); 
+        }
+        
+        .price-card.highlight { 
+            border-color: var(--primary-blue); 
+            box-shadow: 0 0 40px var(--glow-blue); 
+        }
+        
+        .best-value-tag { 
+            position: absolute; 
+            top: -15px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: var(--primary-blue); 
+            color: #fff; 
+            padding: 5px 15px; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+        }
+        
+        .price-card .duration { 
+            font-family: var(--font-heading); 
+            font-size: 1.5rem; 
+            margin-bottom: 0.5rem; 
+        }
+        
+        .price-card .price { 
+            font-family: var(--font-heading); 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            color: var(--primary-blue); 
+            margin-bottom: 2rem; 
         }
 
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-            padding-bottom: 2rem;
+        .main-footer { 
+            padding: 3rem 0; 
+            text-align: center; 
+            border-top: 1px solid var(--border-color); 
+        }
+        
+        .main-footer p { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem 1rem;
+            .section {
+                padding: 60px 0;
             }
-            
-            .logo {
+
+            .section-header h2 {
                 font-size: 2rem;
             }
-            
+
             .btn-group {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .btn {
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
             }
-            
-            .card {
-                padding: 1.5rem;
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <div class="aurora-background"></div>
+    <div class="grid-background"></div>
+
     <div class="container">
-        <header>
-            <div class="logo">ProxyHub</div>
-            <p class="tagline">Premium Roblox scripts with unmatched performance and reliability. Elevate your gaming experience.</p>
-        </header>
-        
-        <div class="card">
+        <section class="section">
+            <div class="section-header">
+                <h2>Proxy Hub</h2>
+                <p>Premium Roblox scripts with unmatched performance and reliability. Elevate your gaming experience.</p>
+            </div>
+
             <div class="btn-group">
                 <button id="releaseBtn" class="btn btn-primary">
                     <i class="fas fa-download"></i> Get Release Script
@@ -301,8 +377,8 @@
                     <i class="fas fa-flask"></i> Get Beta Script
                 </button>
             </div>
-            
-            <div class="key-section" id="keySection">
+
+            <div style="text-align: center;">
                 <button id="keyBtn" class="btn btn-primary">
                     <i class="fas fa-key"></i> Get a Key
                 </button>
@@ -313,12 +389,14 @@
                     </button>
                 </div>
             </div>
-        </div>
-        
-        <div class="card">
-            <h2 class="section-title">About ProxyHub</h2>
-            <p style="margin-bottom: 1.5rem;">Discover the most advanced scripting solution for Roblox, designed by players for players. Our scripts offer unparalleled performance, security, and features that give you the competitive edge.</p>
-            
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2>About Proxy Hub</h2>
+                <p>Discover the most advanced scripting solution for Roblox, designed by players for players. Our scripts offer unparalleled performance, security, and features.</p>
+            </div>
+
             <div class="tabs">
                 <button class="tab-btn active" data-tab="why">Why Choose Us</button>
                 <button class="tab-btn" data-tab="support">Supported Games</button>
@@ -331,41 +409,56 @@
                 
                 <h3>Regular Updates</h3>
                 <p>Our team works around the clock to keep scripts updated and ahead of detection systems. You'll always have access to the latest features and protections.</p>
-                
-                <h3>Dedicated Support</h3>
-                <p>Get help from our expert support team through our Discord server. We're committed to resolving any issues promptly.</p>
             </div>
             
             <div class="tab-content" id="support">
                 <h3>Popular Game Support</h3>
-                <p>We currently support all major Roblox experiences including:</p>
+                <p>We currently support all major Roblox experiences including Blox Fruits, Adopt Me, Brookhaven RP, Pet Simulator X, and many more.</p>
                 
-                <h3>RPG & Adventure</h3>
-                <p>Blox Fruits, King Legacy, Anime Adventures, All Star Tower Defense</p>
-                
-                <h3>Simulators</h3>
-                <p>Pet Simulator X, Bee Swarm Simulator, Mining Simulator 2</p>
-                
-                <h3>Social & RP</h3>
-                <p>Brookhaven RP, Adopt Me, Royale High</p>
+                <h3>Feature Rich</h3>
+                <p>Our scripts include auto-farm, teleport, item ESP, auto-buy, and many other utilities designed to enhance your gameplay experience.</p>
             </div>
             
             <div class="tab-content" id="team">
                 <h3>Experienced Developers</h3>
                 <p>Our team consists of seasoned Roblox developers with years of experience in Lua scripting and game mechanics. We know what makes a great script.</p>
                 
-                <h3>Passionate Gamers</h3>
-                <p>We're players first. Every feature is designed with real gameplay needs in mind, not just technical specifications.</p>
-                
                 <h3>Community Focused</h3>
                 <p>We actively listen to our users and implement the most requested features. Your feedback shapes our development roadmap.</p>
             </div>
-        </div>
-        
-        <footer>
-            <p>&copy; 2023 ProxyHub. All rights reserved. | Not affiliated with Roblox Corporation.</p>
-        </footer>
+        </section>
+
+        <section id="pricing" class="section">
+            <div class="section-header">
+                <h2>Premium Access</h2>
+                <p>Unlock the full potential of ProxyHub with our premium plans</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="duration">Basic</div>
+                    <div class="price">$5/month</div>
+                    <a href="#" class="btn btn-primary">Choose Plan</a>
+                </div>
+                <div class="price-card highlight">
+                    <div class="best-value-tag">Popular</div>
+                    <div class="duration">Pro</div>
+                    <div class="price">$15/month</div>
+                    <a href="#" class="btn btn-primary">Choose Plan</a>
+                </div>
+                <div class="price-card">
+                    <div class="duration">Ultimate</div>
+                    <div class="price">$30/month</div>
+                    <a href="#" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2023 ProxyHub. All rights reserved. Not affiliated with Roblox Corporation.</p>
+        </div>
+    </footer>
 
     <div class="notification" id="notification">
         <i id="notificationIcon"></i>
@@ -406,7 +499,6 @@
         
         // Release script button
         document.getElementById('releaseBtn').addEventListener('click', () => {
-            // In a real implementation, this would copy the script to clipboard
             navigator.clipboard.writeText('loadstring(game:HttpGet("https://proxyhubkey.vercel.app/release_script"))()')
                 .then(() => {
                     showNotification('fas fa-check-circle', 'Release script copied to clipboard!');
@@ -438,10 +530,8 @@
         
         keyBtn.addEventListener('click', () => {
             if (inputGroup.style.display === 'block') {
-                // Already showing input, validate and redirect
                 validateAndRedirect();
             } else {
-                // Show input field
                 inputGroup.style.display = 'block';
                 keyBtn.style.display = 'none';
                 userIdInput.focus();
@@ -473,4 +563,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
