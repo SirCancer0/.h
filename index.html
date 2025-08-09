@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProxyHub | Premium Roblox Scripts</title>
+    <meta name="description" content="Get premium Roblox scripts with ProxyHub. Auto-farm, teleport, ESP and more for your favorite games.">
+    <meta property="og:title" content="ProxyHub | Premium Roblox Scripts">
+    <meta property="og:description" content="Premium Roblox scripts with auto-farm, teleport, ESP and more for your favorite games.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://proxyhub.com">
+    <meta property="og:image" content="https://proxyhub.com/preview.jpg">
+    <meta name="theme-color" content="#3B82F6">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -19,6 +26,7 @@
             --text-color: #FFFFFF;
             --text-muted: #94A3B8;
             --success-green: #10B981;
+            --robux-color: #ff4b34;
             --font-heading: 'Sora', sans-serif;
             --font-body: 'Roboto Mono', monospace;
         }
@@ -35,6 +43,13 @@
             color: var(--text-color);
             overflow-x: hidden;
             position: relative;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .aurora-background {
@@ -95,6 +110,7 @@
         
         .section { 
             padding: 80px 0; 
+            scroll-margin-top: 20px;
         }
         
         .section-header { 
@@ -154,12 +170,44 @@
             transform: translateY(-3px);
         }
 
+        .btn-paypal {
+            background: #0070BA;
+            color: white;
+        }
+
+        .btn-paypal:hover {
+            background: #005EA6;
+            transform: translateY(-3px);
+        }
+
+        .btn-robux {
+            background: var(--robux-color);
+            color: white;
+        }
+
+        .btn-robux:hover {
+            background: #e03a24;
+            transform: translateY(-3px);
+        }
+
         .btn-group {
             display: flex;
             gap: 1rem;
             justify-content: center;
             margin-bottom: 2rem;
             flex-wrap: wrap;
+        }
+
+        .payment-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-direction: column;
+        }
+
+        .payment-buttons .btn {
+            width: 100%;
+            justify-content: center;
         }
 
         .input-group {
@@ -241,11 +289,6 @@
             font-weight: 600;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .notification {
             position: fixed;
             top: 20px;
@@ -318,7 +361,7 @@
             font-size: 2.5rem; 
             font-weight: 800; 
             color: var(--primary-blue); 
-            margin-bottom: 2rem; 
+            margin-bottom: 1rem; 
         }
 
         .main-footer { 
@@ -365,7 +408,7 @@
     <div class="container">
         <section class="section">
             <div class="section-header">
-                <h2>Proxy Hub</h2>
+                <h2>ProxyHub Script Hub</h2>
                 <p>Premium Roblox scripts with unmatched performance and reliability. Elevate your gaming experience.</p>
             </div>
 
@@ -393,7 +436,7 @@
 
         <section class="section">
             <div class="section-header">
-                <h2>About Proxy Hub</h2>
+                <h2>About ProxyHub</h2>
                 <p>Discover the most advanced scripting solution for Roblox, designed by players for players. Our scripts offer unparalleled performance, security, and features.</p>
             </div>
 
@@ -413,10 +456,10 @@
             
             <div class="tab-content" id="support">
                 <h3>Popular Game Support</h3>
-                <p>We currently support all major Roblox experiences including Blox Fruits, Adopt Me, Brookhaven RP, Pet Simulator X, and many more.</p>
+                <p>We currently support all major Roblox experiences including 99 nights, Hypershot, Dig, Rivals, and many more.</p>
                 
                 <h3>Feature Rich</h3>
-                <p>Our scripts include auto-farm, teleport, item ESP, auto-buy, and many other utilities designed to enhance your gameplay experience.</p>
+                <p>Our scripts include many utilities designed to enhance your gameplay experience.</p>
             </div>
             
             <div class="tab-content" id="team">
@@ -437,18 +480,48 @@
                 <div class="price-card">
                     <div class="duration">Basic</div>
                     <div class="price">$5/month</div>
-                    <a href="#" class="btn btn-primary">Choose Plan</a>
+                    <div class="payment-buttons">
+                        <button class="btn btn-primary choose-plan">
+                            <i class="fas fa-shopping-cart"></i> Choose Plan
+                        </button>
+                        <button class="btn btn-paypal paypal-btn">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="btn btn-robux robux-btn">
+                            <i class="fas fa-coins"></i> Pay with Robux
+                        </button>
+                    </div>
                 </div>
                 <div class="price-card highlight">
                     <div class="best-value-tag">Popular</div>
                     <div class="duration">Pro</div>
                     <div class="price">$15/month</div>
-                    <a href="#" class="btn btn-primary">Choose Plan</a>
+                    <div class="payment-buttons">
+                        <button class="btn btn-primary choose-plan">
+                            <i class="fas fa-shopping-cart"></i> Choose Plan
+                        </button>
+                        <button class="btn btn-paypal paypal-btn">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="btn btn-robux robux-btn">
+                            <i class="fas fa-coins"></i> Pay with Robux
+                        </button>
+                    </div>
                 </div>
                 <div class="price-card">
                     <div class="duration">Ultimate</div>
                     <div class="price">$30/month</div>
-                    <a href="#" class="btn btn-primary">Choose Plan</a>
+                    <div class="payment-buttons">
+                        <button class="btn btn-primary choose-plan">
+                            <i class="fas fa-shopping-cart"></i> Choose Plan
+                        </button>
+                        <button class="btn btn-paypal paypal-btn">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="btn btn-robux robux-btn">
+                            <i class="fas fa-coins"></i> Pay with Robux
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -456,7 +529,7 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>© 2023 ProxyHub. All rights reserved. Not affiliated with Roblox Corporation.</p>
+            <p>© 2025 ProxyHub. All rights reserved. Not affiliated with Roblox Corporation.</p>
         </div>
     </footer>
 
@@ -466,101 +539,119 @@
     </div>
 
     <script>
-        // Tab functionality
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            function showNotification(iconClass, text) {
+                const notification = document.getElementById('notification');
+                const icon = document.getElementById('notificationIcon');
+                const message = document.getElementById('notificationText');
                 
-                btn.classList.add('active');
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+                icon.className = iconClass;
+                message.textContent = text;
+                
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            document.getElementById('releaseBtn').addEventListener('click', () => {
+                navigator.clipboard.writeText('loadstring(game:HttpGet("https://proxyhubkey.vercel.app/release_script"))()')
+                    .then(() => {
+                        showNotification('fas fa-check-circle', 'Release script copied to clipboard!');
+                    })
+                    .catch(err => {
+                        showNotification('fas fa-exclamation-circle', 'Failed to copy script');
+                        console.error('Failed to copy: ', err);
+                    });
+            });
+            
+            document.getElementById('betaBtn').addEventListener('click', () => {
+                const discordLink = 'https://discord.gg/c5xJHEfTtu';
+                navigator.clipboard.writeText(discordLink)
+                    .then(() => {
+                        showNotification('fab fa-discord', 'Discord link copied to clipboard!');
+                    })
+                    .catch(err => {
+                        showNotification('fas fa-exclamation-circle', 'Failed to copy link');
+                        console.error('Failed to copy: ', err);
+                    });
+            });
+            
+            const keyBtn = document.getElementById('keyBtn');
+            const inputGroup = document.getElementById('inputGroup');
+            const userIdInput = document.getElementById('userIdInput');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            keyBtn.addEventListener('click', () => {
+                if (inputGroup.style.display === 'block') {
+                    validateAndRedirect();
+                } else {
+                    inputGroup.style.display = 'block';
+                    keyBtn.style.display = 'none';
+                    userIdInput.focus();
+                }
+            });
+            
+            submitBtn.addEventListener('click', validateAndRedirect);
+            
+            userIdInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    validateAndRedirect();
+                }
+            });
+            
+            function validateAndRedirect() {
+                const userId = userIdInput.value.trim();
+                
+                if (!userId) {
+                    showNotification('fas fa-exclamation-circle', 'Please enter your User ID');
+                    return;
+                }
+                
+                if (!/^\d+$/.test(userId)) {
+                    showNotification('fas fa-exclamation-circle', 'User ID must be a number');
+                    return;
+                }
+                
+                window.location.href = `https://proxyhubkey.vercel.app/get_key?user_id=${userId}`;
+            }
+
+            document.querySelectorAll('.choose-plan').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('fas fa-shopping-cart', 'Redirecting to payment gateway...');
+                });
+            });
+
+            document.querySelectorAll('.paypal-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('fab fa-paypal', 'Redirecting to PayPal...');
+                });
+            });
+
+            document.querySelectorAll('.robux-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('fas fa-coins', 'Redirecting to Robux payment...');
+                });
             });
         });
-        
-        // Notification system
-        function showNotification(iconClass, text) {
-            const notification = document.getElementById('notification');
-            const icon = document.getElementById('notificationIcon');
-            const message = document.getElementById('notificationText');
-            
-            icon.className = iconClass;
-            message.textContent = text;
-            
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Release script button
-        document.getElementById('releaseBtn').addEventListener('click', () => {
-            navigator.clipboard.writeText('loadstring(game:HttpGet("https://proxyhubkey.vercel.app/release_script"))()')
-                .then(() => {
-                    showNotification('fas fa-check-circle', 'Release script copied to clipboard!');
-                })
-                .catch(err => {
-                    showNotification('fas fa-exclamation-circle', 'Failed to copy script');
-                    console.error('Failed to copy: ', err);
-                });
-        });
-        
-        // Beta script button
-        document.getElementById('betaBtn').addEventListener('click', () => {
-            const discordLink = 'https://discord.gg/c5xJHEfTtu';
-            navigator.clipboard.writeText(discordLink)
-                .then(() => {
-                    showNotification('fab fa-discord', 'Discord link copied to clipboard!');
-                })
-                .catch(err => {
-                    showNotification('fas fa-exclamation-circle', 'Failed to copy link');
-                    console.error('Failed to copy: ', err);
-                });
-        });
-        
-        // Key button functionality
-        const keyBtn = document.getElementById('keyBtn');
-        const inputGroup = document.getElementById('inputGroup');
-        const userIdInput = document.getElementById('userIdInput');
-        const submitBtn = document.getElementById('submitBtn');
-        
-        keyBtn.addEventListener('click', () => {
-            if (inputGroup.style.display === 'block') {
-                validateAndRedirect();
-            } else {
-                inputGroup.style.display = 'block';
-                keyBtn.style.display = 'none';
-                userIdInput.focus();
-            }
-        });
-        
-        submitBtn.addEventListener('click', validateAndRedirect);
-        
-        userIdInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                validateAndRedirect();
-            }
-        });
-        
-        function validateAndRedirect() {
-            const userId = userIdInput.value.trim();
-            
-            if (!userId) {
-                showNotification('fas fa-exclamation-circle', 'Please enter your User ID');
-                return;
-            }
-            
-            if (!/^\d+$/.test(userId)) {
-                showNotification('fas fa-exclamation-circle', 'User ID must be a number');
-                return;
-            }
-            
-            window.location.href = `https://proxyhubkey.vercel.app/get_key?user_id=${userId}`;
-        }
     </script>
 </body>
-    </html>
+</html>
